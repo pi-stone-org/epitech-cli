@@ -1,0 +1,14 @@
+# Main todo file for the git controller library
+#+TODO: TODO(t) APPROVING(a@/@) | DONE(d!/@)
+#+TODO: REPORT(r!) BUG(b@) | FIXED(f!)
+#+TODO: | CANCELED(c@)
+
+* FEATURES
+** Compilation
+*** Makefile
+**** TODO Base makefile implementation
+:LOGBOOK:
+CLOCK: [2024-12-12 jeu. 20:32]--[2024-12-12 jeu. 22:36] =>  2:04
+:END:
+* UPDATE REPORT
+* COMMENTS
