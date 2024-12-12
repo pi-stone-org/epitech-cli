@@ -14,20 +14,21 @@ LIB_NAME	:= git-controller
 NAME		:= lib$(LIB_NAME).a
 
 ## Folders and non changing names
-SRC_FOLDER	:= src/
+SRC_FOLDER	:= src
 SRC_LIST	:= src.mk
-HEADER_FOLDER	:= include/
-TEST_FOLDER	:= tests/
+HEADER_FOLDER	:= include
+TEST_FOLDER	:= tests
 
 ## Flags and binaries to use
 CC		?= gcc
 AR		?= ar
 CFLAGS		?= -Wall -Wextra
-CPPFLAGS	?= -Iinclude
+CPPFLAGS	?= -I$(HEADER_FOLDER)
 LIBFLAGS	?=
 
 ## SRC and OBJ
 -include	$(SRC_LIST)
+SRC		:= $(addprefix $(SRC_FOLDER)/, $(SRC))
 OBJ		:= $(SRC:.c=.o)
 
 ###########
@@ -36,7 +37,7 @@ OBJ		:= $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(OBJ):
+$(OBJ): $(SRC)
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
@@ -53,13 +54,12 @@ oclean:
 
 clean: oclean eclean
 
-fclean:	clean
+fclean: clean
 	$(RM) $(NAME)
 
 coding-style-reports.log: fclean
-	yes | $(RM) $@
 	coding-style . .
 	@echo -e "Coding style report (may not be present) :\n"
-	@cat coding-style-report.log 2>/dev/null || true
+	@cat $@ 2>/dev/null || true
 
 .PHONY: all eclean aclean oclean fclean

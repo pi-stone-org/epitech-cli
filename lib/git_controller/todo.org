@@ -6,9 +6,16 @@
 * FEATURES
 ** Compilation
 *** Makefile
-**** TODO Base makefile implementation
+**** DONE Basic makefile implementation
+- State "DONE"       from "APPROVING"  [2024-12-12 jeu. 22:51]
+- State "APPROVING"  from "TODO"       [2024-12-12 jeu. 22:40] \\
+  Testing with dummy files
 :LOGBOOK:
 CLOCK: [2024-12-12 jeu. 20:32]--[2024-12-12 jeu. 22:36] =>  2:04
 :END:
 * UPDATE REPORT
+** 0
+*** 0.0
+**** 0.0.1
+- Added the start of the compilation
 * COMMENTS
