@@ -18,6 +18,8 @@ SRC_FOLDER	:= src
 SRC_LIST	:= src.mk
 HEADER_FOLDER	:= include
 TEST_FOLDER	:= tests
+VERSION_FILE	:= version.txt
+VERSION		:= $(shell cat $(VERSION_FILE))
 
 ## Flags and binaries to use
 CC		?= gcc
@@ -36,6 +38,7 @@ OBJ		:= $(SRC:.c=.o)
 ###########
 
 all: $(NAME)
+	@echo "Processing $(NAME)@$(VERSION)"
 
 $(OBJ): $(SRC)
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS) $< -o $@

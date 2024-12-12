@@ -13,9 +13,16 @@
 :LOGBOOK:
 CLOCK: [2024-12-12 jeu. 20:32]--[2024-12-12 jeu. 22:36] =>  2:04
 :END:
+**** TODO Unit tests compilation rules + executions
+SCHEDULED: <2024-12-16 lun.>
 * UPDATE REPORT
 ** 0
 *** 0.0
 **** 0.0.1
 - Added the start of the compilation
+  - src.mk file containing SRC list
+  - Compilation of said sources
+  - Archiving compiled objects as the intended library
+  - Printing version
+  - Compilation includes necessary flags
 * COMMENTS
