@@ -13,8 +13,12 @@
 :LOGBOOK:
 CLOCK: [2024-12-12 jeu. 20:32]--[2024-12-12 jeu. 22:36] =>  2:04
 :END:
-**** TODO Unit tests compilation rules + executions
+**** DONE Unit tests compilation rules + executions
 SCHEDULED: <2024-12-16 lun.>
+- State "DONE"       from "TODO"  [2024-12-16 lun. 22:35]
+:LOGBOOK:
+CLOCK: [2024-12-16 lun. 21:35]--[2024-12-16 lun. 22:35] =>  1:00
+:END:
 * UPDATE REPORT
 ** 0
 *** 0.0
@@ -25,4 +29,5 @@ SCHEDULED: <2024-12-16 lun.>
   - Archiving compiled objects as the intended library
   - Printing version
   - Compilation includes necessary flags
+- Added the unit test compilation
 * COMMENTS

@@ -6,3 +6,11 @@
 
 # Epitech coding-style
 coding-style-report.log
+
+# Unit tests files
+*.gcno
+*.gcda
+unit_tests
+
+# Compilation files
+*.o

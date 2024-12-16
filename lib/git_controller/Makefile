@@ -18,6 +18,7 @@ SRC_FOLDER	:= src
 SRC_LIST	:= src.mk
 HEADER_FOLDER	:= include
 TEST_FOLDER	:= tests
+TEST_SRC_LIST	:= test_src.mk
 VERSION_FILE	:= version.txt
 VERSION		:= $(shell cat $(VERSION_FILE))
 
@@ -32,6 +33,10 @@ LIBFLAGS	?=
 -include	$(SRC_LIST)
 SRC		:= $(addprefix $(SRC_FOLDER)/, $(SRC))
 OBJ		:= $(SRC:.c=.o)
+## Test SRC and OBJ
+-include	$(TEST_SRC_LIST)
+TEST_SRC	:= $(addprefix $(TEST_FOLDER)/, $(TEST_SRC))
+TEST_OBJ	:= $(TEST_SRC:.c=.o)
 
 ###########
 ## Rules ##
@@ -41,6 +46,9 @@ all: $(NAME)
 	@echo "Processing $(NAME)@$(VERSION)"
 
 $(OBJ): $(SRC)
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS) $< -o $@
+
+$(TEST_OBJ): $(TEST_SRC)
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS) $< -o $@
 
 $(NAME): $(OBJ)
@@ -57,12 +65,33 @@ oclean:
 
 clean: oclean eclean
 
-fclean: clean
+fclean:
 	$(RM) $(NAME)
+
+re: clean fclean all
 
 coding-style-reports.log: fclean
 	coding-style . .
 	@echo -e "Coding style report (may not be present) :\n"
 	@cat $@ 2>/dev/null || true
 
-.PHONY: all eclean aclean oclean fclean
+unit_tests: $(OBJ) $(TEST_OBJ)
+	$(CC) -o unit_tests $(OBJ) $(TEST_OBJ) $(CFLAGS) \
+	$(CPPFLAGS) $(LIBFLAGS) --coverage -lcriterion
+
+tests_run: unit_tests
+	@./unit_tests
+	@$(RM) unit_tests
+
+## Other name for tests_run
+criterion: tests_run
+
+full_test_run: unit_tests
+	@./unit_tests
+	@gcovr --exclude tests unit_tests
+	@gcovr --exclude tests --branches unit_tests
+	@$(RM) unit_tests
+	@$(RM) *.gcda
+	@$(RM) *.gcno
+
+.PHONY: all eclean aclean oclean fclean tests_run criterion
