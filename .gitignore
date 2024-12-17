@@ -1,0 +1,18 @@
+
+# Emacs files
+*~
+\#*\#
+.\#*
+
+# Epitech coding-style
+coding-style-reports.log
+
+# Unit tests files
+*.gcno
+*.gcda
+unit_tests
+
+# Compilation files
+*.o
+# Libraries
+*.a
