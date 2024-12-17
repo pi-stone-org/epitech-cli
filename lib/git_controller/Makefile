@@ -5,6 +5,11 @@
 ## makefile for the git controller library
 ##
 
+## PROJECT
+PROJECT_REL_PATH		:= ../..
+PROJECT_LIB_MAKEFILE_NAME	:= LibraryMakefile.mk
+PROJECT_LIB_MAKEFILE		:= $(PROJECT_REL_PATH)/$(PROJECT_LIB_MAKEFILE_NAME)
+
 ## Name
 LIB_NAME	:= git-controller
 
@@ -16,4 +21,4 @@ TEST_FOLDER	:= tests
 TEST_SRC_LIST	:= test_src.mk
 VERSION_FILE	:= version.txt
 
--include ../../LibraryMakefile.mk
+-include $(PROJECT_LIB_MAKEFILE)

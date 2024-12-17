@@ -5,7 +5,7 @@
 .\#*
 
 # Epitech coding-style
-coding-style-report.log
+coding-style-reports.log
 
 # Unit tests files
 *.gcno
