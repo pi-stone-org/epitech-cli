@@ -14,3 +14,5 @@ unit_tests
 
 # Compilation files
 *.o
+# Libraries
+*.a
