@@ -10,7 +10,7 @@
 ############
 
 # Name
-NAME	?= epitech-cli
+NAME	:= epitech-cli
 LIBS	?= git-controller
 
 ## Folders and non changing names
@@ -21,7 +21,7 @@ HEADER_FOLDER	:= include
 TEST_FOLDER	:= tests
 TEST_SRC_LIST	:= test_src.mk
 VERSION_FILE	:= version.txt
-VERSION         := $(-shell cat $(VERSION_FILE))
+VERSION         := $(shell cat $(VERSION_FILE))
 
 ## Flags and binaries to use
 CC		?= gcc
@@ -49,7 +49,7 @@ TEST_OBJ	:= $(TEST_SRC:.c=.o)
 ###########
 
 all: $(NAME)
-	@echo "Processing $(NAME)@$(VERSION)"
+	@echo Processing $(NAME)@$(VERSION)
 
 $(LIBS_OBJ): $(LIBS_SRC)
 	$(MAKE) -C $< $@
