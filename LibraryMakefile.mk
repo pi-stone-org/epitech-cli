@@ -22,14 +22,6 @@ TEST_SRC_LIST   ?= test_src.mk
 VERSION_FILE    ?= version.txt
 VERSION         := $(shell cat $(VERSION_FILE))
 
-## Folders and non changing names
-SRC_FOLDER	:= src
-SRC_LIST	:= src.mk
-HEADER_FOLDER	:= include
-TEST_FOLDER	:= tests
-TEST_SRC_LIST	:= test_src.mk
-VERSION_FILE	:= version.txt
-
 ## Flags and binaries to use
 CC		?= gcc
 AR		?= ar
