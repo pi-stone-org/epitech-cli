@@ -31,8 +31,9 @@ LIBFLAGS	?=
 
 ## LIBRARIES
 LIBS_SRC	:= $(addprefix $(LIB_FOLDER)/, $(LIBS))
-LIBS_FLAGS	:= $(addprefix -L$(LIB_FOLDER)/, $(LIBS))
-LIBS_OBJ	:= $(addsuffix .a, $(addprefix lib, $(LIBS)))
+LIBS_FLAGS	:= $(addprefix -L, $(LIBS_SRC))
+LIBS_OBJ_REL	:= $(addsuffix .a, $(addprefix lib, $(LIBS)))
+LIBS_OBJ	:= $(join $(addsuffix /, $(LIBS_SRC)), $(LIBS_OBJ_REL))
 LIBS_OBJ_FLAGS	:= $(addprefix -l, $(LIBS))
 LIBFLAGS	+= $(LIBS_FLAGS) $(LIBS_OBJ_FLAGS)
 ## SRC and OBJ
@@ -49,10 +50,12 @@ TEST_OBJ	:= $(TEST_SRC:.c=.o)
 ###########
 
 all: $(NAME)
-	@echo Processing $(NAME)@$(VERSION)
+	@echo Processed $(NAME)@$(VERSION)
 
-$(LIBS_OBJ): $(LIBS_SRC)
+$(LIBS_OBJ_REL): $(LIBS_SRC)
 	$(MAKE) -C $< $@
+
+$(LIBS_OBJ): $(LIBS_OBJ_REL)
 
 $(OBJ): $(SRC)
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $(LIBFLAGS) $< -o $@
@@ -71,15 +74,20 @@ eclean:
 
 oclean:
 	$(RM) $(OBJ)
+	$(RM) $(LIBS_OBJ)
 
 clean: oclean eclean
 
 fclean:
 	$(RM) $(NAME)
 
+clear: clean fclean
+	$(RM) unit_tests
+	$(RM) coding-style-reports.log
+
 re: clean fclean all
 
-coding-style-reports.log: fclean
+coding-style-reports.log: clear
 	coding-style . .
 	@echo -e "Coding style report (may not be present) :\n"
 	@cat $@ 2>/dev/null || true
@@ -90,7 +98,6 @@ unit_tests: $(OBJ) $(TEST_OBJ)
 
 tests_run: unit_tests
 	@./unit_tests
-	@$(RM) unit_tests
 
 ## Other name for tests_run
 criterion: tests_run
@@ -103,4 +110,5 @@ full_test_run: unit_tests
 	@$(RM) *.gcda
 	@$(RM) *.gcno
 
-.PHONY: all eclean aclean oclean fclean tests_run criterion
+.PHONY: all eclean aclean oclean fclean clear tests_run criterion\
+ full_test_run $(LIBS_OBJ_REL)
